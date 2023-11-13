@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cricket game</title>
+    <style>
+        body{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bat Ball Stump game </h1>
+    <Button onclick="
+        // call the function to Know  computer choise 
+        let computerChoice= generateComputerChoise();
+        let result=getResult('Bat', computerChoice);
+        outputMsg('Bat',computerChoice,result);
+        "
+    >Bat</Button>
+
+    <Button onclick="
+        computerChoice=generateComputerChoise();
+        result=getResult('Ball',computerChoice);
+        outputMsg('Ball',computerChoice,result);
+        "
+    >Ball</Button>
+    <Button onclick="
+        computerChoice= generateComputerChoise();
+        result=getResult('Stump', computerChoice);
+        outputMsg('Stump',computerChoice,result);
+        "
+    >Stump</Button>
+
+    <script>
+        // now lets generate computer choice using function
+
+        let score={
+            win:0,
+            tie:0,
+            lost:0,
+        };
+
+        function generateComputerChoise(){
+            // random <- will generate random number between 0 and 1 <- now mul with n <- so new rand val ( 0-n)
+            let randonNumber=Math.random()*3;
+            if(randonNumber>0 && randonNumber<=1){
+                return 'Bat';
+            }
+            else if(randonNumber>1 && randonNumber<=2){
+                return 'Ball';
+            }
+            else{
+                return 'Stump';
+            }
+        }
+
+        function getResult(userChoice , computerChoice){
+            if(userChoice==='Bat'){
+                if(computerChoice==='Ball'){
+                    score.win+=1;
+                    return 'User wom';
+                }else if(computerChoice==='Bat'){
+                    score.tie+=1;
+                    return `It's a tie`;
+                }else if(computerChoice === 'Stump'){
+                    score.lost+=1;
+                    return'Computer won';
+                }
+            }
+            else if(userChoice==='Ball'){
+                // console.log(userChoice);
+                if(computerChoice==='Stump'){
+                    score.win+=1;
+                    return 'User wom';
+                }else if(computerChoice==='Ball'){
+                    score.tie+=1;
+                    return `It's a tie`;
+                }else if(computerChoice === 'Bat'){
+                    score.lost+=1;
+                    return 'Computer won';
+                }
+                
+            }
+            else{
+                if(computerChoice==='Bat'){
+                    score.win+=1;
+                    return 'User wom';
+                }else if(computerChoice==='Stump'){
+                    score.tie+=1;
+                    return `It's a tie`;
+                }else if(computerChoice === 'Ball'){
+                    score.lost+=1;
+                    return 'Computer won';
+                } 
+            }
+
+        }
+
+        function outputMsg( userChoice ,computerChoice,result){
+            alert(`Your have chosen ${userChoice}. Computer choise is ${computerChoice} 
+            
+            ${result}
+            
+            Won: ${score.win} Tie :${score.tie} Lost: ${score.lost}
+            `);
+        }
+
+    </script>
+    
+</body>
+</html>
