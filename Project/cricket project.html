@@ -4,35 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cricket game</title>
-    <style>
-        body{
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="cricket.css">
 </head>
 <body>
     <h1>Bat Ball Stump game </h1>
-    <Button onclick="
+
+    
+    <Button  class="choice-button" onclick="
         // call the function to Know  computer choise 
         let computerChoice= generateComputerChoise();
         let result=getResult('Bat', computerChoice);
         outputMsg('Bat',computerChoice,result);
         "
-    >Bat</Button>
+    ><img src="image/bat.png" alt="Bat image" class="choice-img"></Button>
 
-    <Button onclick="
+    <Button class="choice-button" onclick="
         computerChoice=generateComputerChoise();
         result=getResult('Ball',computerChoice);
         outputMsg('Ball',computerChoice,result);
         "
-    >Ball</Button>
-    <Button onclick="
+    ><img src="image/ball.png" alt="Ball image" class="choice-img"></Button>
+    <Button class="choice-button" onclick="
         computerChoice= generateComputerChoise();
         result=getResult('Stump', computerChoice);
         outputMsg('Stump',computerChoice,result);
         "
-    >Stump</Button>
+    ><img src="image/stump.png" alt="Stump image" class="choice-img"></Button>
 
+    <!-- result -->
+    <h3 id="user-move"></h3>
+    <h3 id="computer-move"></h3>
+    <h3 id="result"></h3>
+    <h3 id="score"></h3>
+
+    <!-- reset button -->
     <button onclick="
     localStorage.clear();
     resetScore();
@@ -49,10 +54,10 @@
                 tie:0,
                 lost:0,
             };
-            
             score.displayScore=function (){
                 return `Won: ${score.win} Tie :${score.tie} Lost: ${score.lost}`;
             }
+            outputMsg();
         }
         function generateComputerChoise(){
             // random <- will generate random number between 0 and 1 <- now mul with n <- so new rand val ( 0-n)
@@ -112,11 +117,14 @@
 
         function outputMsg( userChoice ,computerChoice,result){
             localStorage.setItem('Score',JSON.stringify(score));
-            alert(`Your have chosen ${userChoice}. Computer choise is ${computerChoice} 
-            
-            ${result}
-            ${score.displayScore()}
-            `);
+            document.querySelector("#user-move").innerText= 
+            userChoice ? `Your have chosen ${userChoice}` :'';
+
+            document.querySelector("#computer-move").innerText= 
+            computerChoice ? `computer has chosen ${computerChoice}` :'';
+
+            document.querySelector("#result").innerText=  result || '';
+            document.querySelector("#score").innerText= score.displayScore();
         }
 
     </script>

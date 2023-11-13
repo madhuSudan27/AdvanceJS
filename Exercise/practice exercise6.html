@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 6</title>
+    <style>
+        #button-counter{
+            height: 50px;
+            width: 50px;
+            font-size: 35px;
+            border-radius: 10px;
+            border: none;
+        }
+        .odd{
+            background-color: burlywood;
+        }
+        .even{
+            background-color: rgb(150, 231, 68);
+        }
+    </style>
+</head>
+<body>
+
+    <button id="button-counter" onclick="buttonClicked();" >0</button>
+    <script>
+
+        let clickedCount= localStorage.getItem('clickedCount') ||  0;
+        function buttonClicked(){
+            clickedCount++;
+            localStorage.setItem("clickedCount",clickedCount);
+            updateButton();
+        }
+
+        function updateButton(){
+            let button=document.querySelector('#button-counter');
+            if(clickedCount%2==0){
+                button.classList.remove('odd');
+                button.classList.add('even');
+            }
+            else{
+                button.classList.remove('even');
+                button.classList.add('odd');
+            }
+            button.innerText=clickedCount;
+
+        }
+
+        updateButton();
+
+        
+        // function greeting(name='dear'){
+        //     let dateObj=new Date();
+        //     let currTime=dateObj.getHours();
+        //     if(currTime<=12 && currTime>=0){
+        //         console.log(`Good Morning ${name}`);
+        //     }
+        //     else if(currTime>12 && currTime<=18){
+        //         console.log(`Good afterNoon ${name}`)
+        //     }
+        //     else{
+        //         // just for fun concadination 
+        //         console.log('good night '+ name);
+        //     }
+        // }
+
+        // greeting('anand');
+
+        // now new task how many times button has beeen prased
+
+
+    </script>
+    
+</body>
+</html>
