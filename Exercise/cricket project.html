@@ -33,15 +33,27 @@
         "
     >Stump</Button>
 
+    <button onclick="
+    localStorage.clear();
+    resetScore();
+    ">Reset</button>
+
     <script>
         // now lets generate computer choice using function
-
-        let score={
-            win:0,
-            tie:0,
-            lost:0,
-        };
-
+        let scoreStr=localStorage.getItem('Score');
+        let score;
+        resetScore(scoreStr);
+        function resetScore(scoreStr){
+            score=scoreStr ?JSON.parse(scoreStr) : {
+                win:0,
+                tie:0,
+                lost:0,
+            };
+            
+            score.displayScore=function (){
+                return `Won: ${score.win} Tie :${score.tie} Lost: ${score.lost}`;
+            }
+        }
         function generateComputerChoise(){
             // random <- will generate random number between 0 and 1 <- now mul with n <- so new rand val ( 0-n)
             let randonNumber=Math.random()*3;
@@ -99,11 +111,11 @@
         }
 
         function outputMsg( userChoice ,computerChoice,result){
+            localStorage.setItem('Score',JSON.stringify(score));
             alert(`Your have chosen ${userChoice}. Computer choise is ${computerChoice} 
             
             ${result}
-            
-            Won: ${score.win} Tie :${score.tie} Lost: ${score.lost}
+            ${score.displayScore()}
             `);
         }
 

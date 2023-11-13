@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exercise 5</title>
+</head>
+<body>
+
+    <script>
+
+        let product={
+            Company:'Mango',
+            item: 'Jeans',
+            price: 1234,
+            'dilevry-Time': '10:12:2023',
+        }
+        let product2={
+            Company:'Mango',
+            item: 'Jeans',
+            price: 1234,
+            'dilevry-Time': '10:12:2023',
+        }
+        let product1=product;
+        product1.price=10000;
+        console.log(product.price);
+        console.log(product1.price);
+        console.log(product['dilevry-Time']);
+
+        let feedBack={
+            message: 'good job',
+            status: 'complete',
+        }
+
+        // array de structuring <- using same name as obj 
+        let {message,status}=feedBack;
+        console.log(message);
+        console.log(status);
+        // another way 
+        let feedBackMessage =feedBack.message;
+        let feedBackStatus =feedBack.status;
+        console.log(feedBackMessage);
+        console.log(feedBackStatus);
+
+        function isIdentical( obj1 , obj2){
+            if( typeof obj1 !== 'object' || typeof  obj2 !== 'object'){
+                console.warn('Parameter Passed was not an object');
+                return false;
+            }
+            // will check reference not the value 
+            if(obj1 ==obj2){
+                return true;
+            }
+            if(obj1.Company==obj2.Company && obj1.item==obj2.item && obj1.price==obj2.price){
+                return true;
+            }
+            return false;
+        }
+        console.log(isIdentical(product,product1));
+        console.log(isIdentical(product,product2));
+
+
+
+    </script>
+    
+</body>
+</html>
